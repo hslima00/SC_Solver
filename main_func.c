@@ -17,7 +17,7 @@ int ** ler_ficheiro(){
     fscanf(fPointer, "%s", fileInfo);
     int SC = atoi(fileInfo);
     //--------------------------------------------------
-    
+    //teste
     int ** matrix;
     /* int ** matrix; vai ser um array de tamanho dinamico (consoante L e C de cada ficheiro) não podemos fazer 
     matrix[L][C] (pois quando definimos um array, este tem de ser definido com constantes). Para resolver isto
