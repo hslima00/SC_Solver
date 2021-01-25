@@ -1,14 +1,15 @@
 #include "main.h"
 
-puzzle ler_ficheiro() {
+puzzle ler_ficheiro(int argc, char* argv[]) {
 	printf("FUNCAO LER FICHEIRO:  \n");
 	int i, j;
 	puzzle matriz_struct;
 	// ------------------- LÊ L, C, SL, SC--------------
 	FILE* fPointer;
+	
 	if ((fPointer = fopen("prob05.prb", "r")) == NULL) return;
-
-	//fPointer = fopen("prob05.prb", "r");
+	fPointer = fopen("prob05.prb", "r");
+	
 	char fileInfo[150];
 	fileInfo[149] = '\0'; // -> deletes warning C6386
 			 //atoi -> The C library function int atoi(const char *str) converts the string argument str to an integer (type int).
@@ -59,6 +60,7 @@ void verif_zero_alone(puzzle matriz_struct) {
 	//ver linha a linha:
 	int z_counter = 0;
 	int funcao_solve_zero_alone = 1;
+	int zero_location;
 	//L,C = i,j
 	//na linha 0, quero avançar de coluna a coluna à procura de 0's, se n encontrar ent incrementa a linha
 	int tipo_de_varramento = 0;
@@ -66,8 +68,9 @@ void verif_zero_alone(puzzle matriz_struct) {
 		for (j = 0; j < matriz_struct.C;j++) {
 			if (matriz_struct.matriz[i][j] == 0) {
 				z_counter++;
+				zero_location = j;
 			}
-			if (j == (matriz_struct.C - 1) && z_counter == 1)solve_zero_alone(i, j - 1, matriz_struct, tipo_de_varramento);
+			if (j == (matriz_struct.C - 1) && z_counter == 1)solve_zero_alone(i, zero_location, matriz_struct, tipo_de_varramento);
 			// printf("\n%d", z_counter);
 		}
 	}//LEITURA POR LINHA REALIZADA
@@ -76,17 +79,19 @@ void verif_zero_alone(puzzle matriz_struct) {
 	tipo_de_varramento = 1;
 	for (j = 0; j < matriz_struct.C; j++, z_counter = 0) {
 		for (i = 0; i < matriz_struct.L;i++) {
-			if (matriz_struct.matriz[i][j] == 0)z_counter++;
+			if (matriz_struct.matriz[i][j] == 0) {
+				z_counter++;
+				zero_location = i;
+			}
 			//se estivermos na ultima posição da coluna, e só houver 1 zero, então chamamos a função q resolve
-			if (i == (matriz_struct.L - 1) && z_counter == 1)solve_zero_alone(i - 1, j, matriz_struct, tipo_de_varramento);
+			if (i == (matriz_struct.L - 1) && z_counter == 1)solve_zero_alone(zero_location, j, matriz_struct, tipo_de_varramento);
 		}
 	}
 
 	printf("\nLEITURA POR COLUNA REALIZADA");
 	printMatriz(matriz_struct);
-
-	
 }
+
 
 void solve_zero_alone(int i, int j, puzzle matriz_struct, int tipo_de_varramento) {
 	//printf("\nsolve_zero_alone foi chamada, posicao %d %d", i,j);
@@ -110,3 +115,4 @@ void solve_zero_alone(int i, int j, puzzle matriz_struct, int tipo_de_varramento
 
 	//printf("\nsoma linha = %d, solved 0 is %d", somaColuna, sol_coluna);
 }
+

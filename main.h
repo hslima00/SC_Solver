@@ -15,3 +15,4 @@ puzzle ler_ficheiro();
 void printMatriz(puzzle);		
 void verif_zero_alone(puzzle);
 void solve_zero_alone();
+
