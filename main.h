@@ -3,5 +3,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 //teste
-int ** ler_ficheiro();
-void printMatriz(int **);	
+typedef struct {
+	int ** matriz;
+	int L;
+	int C;
+	int SL;
+	int SC;
+}puzzle;
+
+puzzle ler_ficheiro();
+void printMatriz(puzzle);		
+
