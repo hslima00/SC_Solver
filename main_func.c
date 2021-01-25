@@ -1,15 +1,15 @@
 #include "main.h"
 
-puzzle ler_ficheiro(int argc, char* argv[]) {
+data_struct ler_ficheiro(int argc, char* argv[]) {
 	printf("FUNCAO LER FICHEIRO:  \n");
 	int i, j;
-	puzzle matriz_struct;
+	data_struct matriz_struct;
 	// ------------------- LÊ L, C, SL, SC--------------
 	FILE* fPointer;
-	
+
 	if ((fPointer = fopen("prob05.prb", "r")) == NULL) return;
 	fPointer = fopen("prob05.prb", "r");
-	
+
 	char fileInfo[150];
 	fileInfo[149] = '\0'; // -> deletes warning C6386
 			 //atoi -> The C library function int atoi(const char *str) converts the string argument str to an integer (type int).
@@ -43,7 +43,7 @@ puzzle ler_ficheiro(int argc, char* argv[]) {
 	return matriz_struct;
 }
 
-void printMatriz(puzzle matriz_struct) {
+void printMatriz(data_struct matriz_struct) {
 	int i, j;
 	printf("\n");
 	for (i = 0;i < matriz_struct.C;i++) {
@@ -54,7 +54,7 @@ void printMatriz(puzzle matriz_struct) {
 	}
 }
 
-void verif_zero_alone(puzzle matriz_struct) {
+void verif_zero_alone(data_struct matriz_struct) {
 	int i;
 	int j;
 	//ver linha a linha:
@@ -93,7 +93,7 @@ void verif_zero_alone(puzzle matriz_struct) {
 }
 
 
-void solve_zero_alone(int i, int j, puzzle matriz_struct, int tipo_de_varramento) {
+void solve_zero_alone(int i, int j, data_struct matriz_struct, int tipo_de_varramento) {
 	//printf("\nsolve_zero_alone foi chamada, posicao %d %d", i,j);
 	int somaLinha = 0, somaColuna = 0, sol_linha = 0, sol_coluna = 0;
 	//printf("\nSOLVE_ZERO_ALONE CHAMADA");
@@ -115,4 +115,5 @@ void solve_zero_alone(int i, int j, puzzle matriz_struct, int tipo_de_varramento
 
 	//printf("\nsoma linha = %d, solved 0 is %d", somaColuna, sol_coluna);
 }
+
 
